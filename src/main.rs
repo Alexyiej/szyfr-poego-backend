@@ -3,7 +3,7 @@ use lambda_http::{run, service_fn, Body, Error, Request, http, Response};
 use crate::http::HeaderValue;
 use serde::{Deserialize, Serialize};
 
-
+// backend jest zdeployowany na AWS Lambda, a front na vercelu wiec nie musisz odpalac u siebie
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
