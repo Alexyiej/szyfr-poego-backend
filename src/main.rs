@@ -4,6 +4,7 @@ use crate::http::HeaderValue;
 use serde::{Deserialize, Serialize};
 
 
+
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     let cipher_key = "gjAiTr|u?m&$FJn.>z'WyP{:xYhB;qZ!w)eM[-V%NaCo_sX_}L*Q";
@@ -33,12 +34,11 @@ async fn lambda_path_handler(event: Request, cipher_map: HashMap<char, char>, de
         ("/cipher", "POST") => CipherController::cipher(&controller, event, cipher_map).await,
         ("/decipher", "POST") => CipherController::decipher(&controller, event, decipher_map).await,
 
-        _ => Ok(build_response(404, LambdaResponse{
-            text: String::from("Not Found")
-        }))
+        _ => Ok(build_response(404, LambdaResponse{ text: String::from("Not Found") }))
 
     }
 }
+
 
 
 fn build_response(status_code: u16, body: LambdaResponse) -> Response<Body> {
@@ -64,10 +64,7 @@ impl CipherController {
     async fn cipher(&self, event: http::Request<Body>, cipher_map: HashMap<char, char>) ->  Result<Response<Body>, Error> {
         let request_body = event.into_body();
     
-        // Odbierz treść żądania jako JSON
         let request_json: LambdaRequest = serde_json::from_slice(&request_body.to_vec()).unwrap();
-        
-        // Teraz masz dostęp do właściwości "text"
         let request_text = request_json.text;
 
         let cipher: String = request_text.chars().map(|text_char| {
@@ -86,10 +83,7 @@ impl CipherController {
     async fn decipher(&self, event: http::Request<Body>, decipher_map: HashMap<char, char>) ->  Result<Response<Body>, Error> {
         let request_body = event.into_body();
     
-        // Odbierz treść żądania jako JSON
         let request_json: LambdaRequest = serde_json::from_slice(&request_body.to_vec()).unwrap();
-        
-        // Teraz masz dostęp do właściwości "text"
         let request_text = request_json.text;
 
         let decipher: String = request_text.chars().map(|text_char| {
