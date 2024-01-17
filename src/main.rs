@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
-    let cipher_key = "gjAiTr|u?m&$FJn.>z'WyP{:xYhB;qZ!w)eM[-V%NaCo_sX_}L*Q";
+    let cipher_key = "gjAiTr|u?m&$FJn.>z'WyP{:xYhB;qZ!w)eM[-V%NaCo_sX8}L*Q";
 
     let cipher_map = cipher_map(cipher_key);
     let decipher_map = decipher_map(&cipher_map);
